@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+  frontend_builder:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-builder
+    volumes:
+      - ./frontend:/app:delegated
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-serve
+    volumes:
+      - ./frontend:/app:cached
+    ports:
+      - 3000:3000
+    depends_on:
+      - frontend_builder
+  backend:
+    build: ./backend
+    volumes:
+      - "./backend:/app"
+    ports:
+      - 8081:80
+    depends_on:
+      - database
+  database:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: patron

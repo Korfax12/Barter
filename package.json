@@ -1,0 +1,12 @@
+{
+  "name": "Barter",
+  "version": "1.0.0",
+  "description": "## Development",
+  "main": "index.js",
+  "scripts": {
+    "dev": "docker-compose build --parallel && docker-compose up --force-recreate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Korfax12/Barter.git"
+  }}
