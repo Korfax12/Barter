@@ -35,4 +35,4 @@ services:
       - SYS_NICE  # CAP_SYS_NICE
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: patron
+      MYSQL_DATABASE: Barter
